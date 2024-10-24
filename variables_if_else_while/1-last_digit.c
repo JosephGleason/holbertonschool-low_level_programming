@@ -3,10 +3,14 @@
 #include <time.h>
 
 /**
- * main - N var prints wether positive, negative or equal
+ * main - Entry point of the program
  *
- * Return: (0)
- **/
+ * Description: This program generates a random number and
+ * prints the last digit of the number stored in the variable n.
+ * It also provides a message based on the value of the last digit.
+ *
+ * Return: Always 0 (Success)
+ */
 int main(void)
 {
 	int n;
