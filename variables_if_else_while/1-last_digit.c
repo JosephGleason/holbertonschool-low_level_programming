@@ -9,8 +9,9 @@
  * prints the last digit of the number stored in the variable n.
  * It also provides a message based on the value of the last digit.
  *
- * Return: Always 0 (Success)
- */
+ * Return: (0)
+ **/
+
 int main(void)
 {
 	int n;
@@ -28,7 +29,7 @@ int main(void)
 	}
 	else if (n < (n % 10) && (n % 10 != 0))
 	{
-	printf("Last digit of %d is %d and is less than 6 and not 0\n", n);
+	printf("Last digit of %d is %d and is less than 6 and not 0\n", n, n % 10);
 	}
 	return (0);
 }
