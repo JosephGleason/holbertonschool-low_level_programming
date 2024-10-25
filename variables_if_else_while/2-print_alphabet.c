@@ -3,7 +3,7 @@
 /**
  * main - This is the entry point of the code
  *
- * Return: 0 Sucess
+ * Return: (0) Success
  *
  **/
 int main(void)
@@ -12,6 +12,7 @@ int main(void)
 	{
 	putchar(i);
 	}
+	putchar('\n');
 	return (0);
 
 }
