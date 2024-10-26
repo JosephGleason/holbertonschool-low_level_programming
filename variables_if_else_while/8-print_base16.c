@@ -16,6 +16,6 @@ int main(void)
 			putchar('W' + i);
 	}
 		putchar('\n');
-		
-	return (0);
+
+		return (0);
 }
