@@ -13,8 +13,7 @@ int main(void)
 		if (i < 10)
 			putchar('0' + i);
 		else
-			putchar('a' + i);
-		putchar('0' + i);
+			putchar('W' + i);
 	}
 
 	return (0);
