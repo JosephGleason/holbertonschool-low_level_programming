@@ -15,6 +15,7 @@ int main(void)
 		else
 			putchar('W' + i);
 	}
-
+		putchar('\n');
+		
 	return (0);
 }
