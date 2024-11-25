@@ -12,20 +12,20 @@
 
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
+	unsigned int i;
 	char *one;
 
 	if (nmemb == 0 || size == 0)
-	{
 		return (NULL);
-	}
+	
 	one = malloc(size * nmemb);
 
 	if (one == NULL)
-	{
 		return (NULL);
-	}
-	else
-	{
-		return (one);
-	}
+	
+	
+	for (i = 0; i < (size * nmemb); i++)
+		one[i] = 0;
+
+	return (one);
 }
