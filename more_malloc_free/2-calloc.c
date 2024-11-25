@@ -7,7 +7,7 @@
  * @nmemb: the number of elements
  * @size: the size of that element type
  *
- * Return: A pointer to the allocated memeory. NULL if nmemb or size is 0.
+ * Return: A pointer to the allocated memory. NULL if nmemb or size is 0.
  */
 
 void *_calloc(unsigned int nmemb, unsigned int size)
@@ -17,15 +17,17 @@ void *_calloc(unsigned int nmemb, unsigned int size)
 
 	if (nmemb == 0 || size == 0)
 		return (NULL);
-	
+
 	one = malloc(size * nmemb);
 
 	if (one == NULL)
 		return (NULL);
-	
-	
+
+	/* Initialize all bytes to 0 */
 	for (i = 0; i < (size * nmemb); i++)
+	{
 		one[i] = 0;
+	}
 
 	return (one);
 }
