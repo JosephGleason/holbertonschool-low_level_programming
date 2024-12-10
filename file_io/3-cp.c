@@ -79,5 +79,3 @@ void error_exit(int code, const char *message, const char *filename)
 		dprintf(STDERR_FILENO, "%s\n", message);
 	exit(code);
 }
-
-
