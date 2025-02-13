@@ -5,9 +5,6 @@
  *   The main function prints a quote to the standard error using the write
  *   system call and returns 1 to indicate an error status.
  *
- *   The quote printed is:
- *   "and that piece of art is useful" - Dora Korpar, 2015-10-19
- *
  * Return: 1 (error status)
  */
 #include <unistd.h>
