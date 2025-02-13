@@ -1,0 +1,3 @@
+#!/bin/bash
+gcc -S "$CFILE" -o "${CFILE%.c}.s"
+
