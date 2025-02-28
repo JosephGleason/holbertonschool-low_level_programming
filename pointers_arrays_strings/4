@@ -1,0 +1,18 @@
+#include "main.h"
+/**
+ * _puts - prints string and new line
+ *
+ * @str: string
+ *
+ */
+void print_rev(char *s)
+{
+	int i, j;
+
+	i = _strlen(*s);
+	for (j = i; j >= 0; j--)
+	{
+		_putchar(s[i]);
+	}
+_putchar('\n');
+}
