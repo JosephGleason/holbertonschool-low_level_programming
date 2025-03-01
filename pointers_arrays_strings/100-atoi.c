@@ -4,35 +4,38 @@
  * _atoi - Converts a string to an integer.
  * @s: The string to convert.
  *
- * Return: The converted integer.
+ * Return: The integer value of the string.
  */
 int _atoi(char *s)
 {
-	int i = 0;
-	int sign = 1;
-	int result = 0;
-	int found_digit = 0;
+    int i = 0;
+    int sign = 1;
+    int num = 0;
+    int digit;
 
-	/* Step 1: Traverse the string */
-	while (s[i] != '\0')
-	{
-		/* Handle sign */
-		if (s[i] == '-')
-			sign *= -1;
-		else if (s[i] == '+')
-			sign *= 1;
-		/* Convert digits to integer */
-		else if (s[i] >= '0' && s[i] <= '9')
-		{
-			found_digit = 1; /* Mark that we found a number */
-			result = result * 10 + (s[i] - '0');
-		}
-		/* Stop conversion when digits end */
-		else if (found_digit)
-			break;
+    while (s[i] != '\0' && (s[i] < '0' || s[i] > '9'))
+    {
+        if (s[i] == '-')
+            sign *= -1;
+        i++;
+    }
 
-		i++;
-	}
+    while (s[i] >= '0' && s[i] <= '9')
+    {
+        digit = s[i] - '0';  /* Convert char to int */
 
-	return (result * sign);
+        if (num > 214748364 || (num == 214748364 && digit > 7))
+        {
+            if (sign == 1)
+                return (2147483647); /* Max positive value */
+            else
+                return (-2147483648); /* Max negative value */
+        }
+
+        num = num * 10 + digit;
+        i++;
+    }
+
+    return (num * sign);
 }
+
