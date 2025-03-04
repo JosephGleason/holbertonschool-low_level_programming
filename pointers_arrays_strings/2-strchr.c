@@ -1,4 +1,3 @@
-#include "main.h"
 #include <stddef.h>  /* for NULL */
 
 /**
@@ -7,23 +6,23 @@
  * @c: the character to locate
  *
  * Return: pointer to the first occurrence of the character `c`,
- * in the string `s` or NULL if the character is not found
+ * in the string `s`, or NULL if the character is not found.
  */
 char *_strchr(char *s, char c)
 {
-	int i;
-
-	for (i = 0; s[i] != '\0'; i++)
+	while (*s != '\0')
 	{
-		if (s[i] == c)
+		if (*s == c)
 		{
-			return (s + i);
+			return s;
 		}
+		s++;
 	}
 
-	if (s[i] == c)
+	if (c == '\0')
 	{
-		return (s + i);
+		return s;
 	}
-	return (NULL);
+
+	return NULL;
 }
