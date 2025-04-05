@@ -1,5 +1,5 @@
 #include "lists.h"
-/* 
+/**
  * dlistint_len - returns the num of elements in dlistint_t list
  * @h: pointer to head
  *
