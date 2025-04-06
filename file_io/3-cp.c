@@ -1,61 +1,41 @@
 #include "main.h"
-
 /**
- * handle_error - Handles errors by printing messages and exiting.
- * @code: Exit code.
- * @filename: Filename associated with the error.
+ * main - It append the file
+ * @argc: argument counter
+ * @argv: argument vector
+ * Return: always return 0
  */
-void handle_error(int code, char *filename)
+int main(int argc, char *argv[])
 {
-	if (code == 98)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-	else if (code == 99)
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-	else if (code == 100)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %s\n", filename);
-	exit(code);
-}
+	int fd, rd, wr, fp;
+	char *buf[1024];
 
-/**
- * main - Copies the content of one file to another.
- * @ac: Argument count.
- * @av: Argument vector.
- *
- * Return: Always 0 (Success).
- */
-int main(int ac, char **av)
-{
-	int fd_from, fd_to, r, w;
-	char buf[1024];
-
-	if (ac != 3)  /* Check the number of arguments */
+	if (argc != 3)
+		dprintf(2, "Usage: cp file_from file_to\n"), exit(97);
+	if (!argv[1])
 	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
+		dprintf(2, "Error: Can't read from file %s\n", argv[1]), exit(98);
 	}
-
-	fd_from = open(av[1], O_RDONLY);
-	if (fd_from == -1)  /* Error opening file_from */
-		handle_error(98, av[1]);
-
-	fd_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-	if (fd_to == -1)  /* Error opening or creating file_to */
-		handle_error(99, av[2]);
-
-	while ((r = read(fd_from, buf, 1024)) > 0)
+	fp = open(argv[2], O_WRONLY | O_TRUNC | O_CREAT, 0664);
+	if (fp == -1)
+		dprintf(2, "Error: Can't write to %s\n", argv[2]), exit(99);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
 	{
-		w = write(fd_to, buf, r);
-		if (w == -1)  /* Error writing to file_to */
-			handle_error(99, av[2]);
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
+		exit(98);
 	}
-	if (r == -1)  /* Error reading from file_from */
-		handle_error(98, av[1]);
-
-	if (close(fd_from) == -1)
-		handle_error(100, av[1]);
-	if (close(fd_to) == -1)
-		handle_error(100, av[2]);
-
+	while ((rd = read(fd, buf, 1024)) != 0)
+	{
+		if (rd == -1)
+			dprintf(2, "Error: Can't read from file %s\n", argv[1]), exit(98);
+		wr = write(fp, buf, rd);
+		if (wr == -1)
+			dprintf(2, "Error: Can't write to %s\n", argv[2]), exit(99);
+	}
+	if ((close(fd)) == -1)
+		dprintf(2, "Error: Can't close fd %d\n", fd), exit(100);
+	if ((close(fp)) == -1)
+		dprintf(2, "Error: Can't close fd %d\n", fp), exit(100);
 	return (0);
 }
-
