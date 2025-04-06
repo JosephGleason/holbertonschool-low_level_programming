@@ -1,6 +1,22 @@
 #include "main.h"
 
 /**
+ * handle_error - Handles errors by printing messages and exiting.
+ * @code: Exit code.
+ * @filename: Filename associated with the error.
+ */
+void handle_error(int code, char *filename)
+{
+	if (code == 98)
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+	else if (code == 99)
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+	else if (code == 100)
+		dprintf(STDERR_FILENO, "Error: Can't close fd %s\n", filename);
+	exit(code);
+}
+
+/**
  * main - Copies the content of one file to another.
  * @ac: Argument count.
  * @av: Argument vector.
@@ -30,7 +46,7 @@ int main(int ac, char **av)
 	{
 		w = write(fd_to, buf, r);
 		if (w == -1)  /* Error writing to file_to */
-			handle_error(98, av[2]);
+			handle_error(99, av[2]);
 	}
 	if (r == -1)  /* Error reading from file_from */
 		handle_error(98, av[1]);
@@ -43,18 +59,3 @@ int main(int ac, char **av)
 	return (0);
 }
 
-/**
- * handle_error - Handles errors by printing messages and exiting.
- * @code: Exit code.
- * @filename: Filename associated with the error.
- */
-void handle_error(int code, char *filename)
-{
-	if (code == 98)
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-	else if (code == 99)
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-	else if (code == 100)
-		dprintf(STDERR_FILENO, "Error: Can't close fd %s\n", filename);
-	exit(code);
-}
