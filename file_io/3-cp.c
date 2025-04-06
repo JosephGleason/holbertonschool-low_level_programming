@@ -30,7 +30,7 @@ int main(int ac, char **av)
 	{
 		w = write(fd_to, buf, r);
 		if (w == -1)  /* Error writing to file_to */
-			handle_error(99, av[2]);
+			handle_error(98, av[2]);
 	}
 	if (r == -1)  /* Error reading from file_from */
 		handle_error(98, av[1]);
